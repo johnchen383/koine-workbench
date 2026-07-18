@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Koine Workbench: λ (logos) with the amber "translation decision" underline -->
+  <!-- Koine Workbench: λ (logos) -->
   <rect width="64" height="64" rx="13" fill="#0f6b62"/>
-  <text x="32" y="41" font-family="Cardo, Georgia, 'Times New Roman', serif" font-size="40"
+  <text x="32" y="36" font-family="Cardo, Georgia, 'Times New Roman', serif" font-size="46"
         fill="#faf7f1" text-anchor="middle" dominant-baseline="middle">λ</text>
-  <rect x="18" y="50" width="28" height="4" rx="1" fill="#e8a35c"/>
 </svg>
