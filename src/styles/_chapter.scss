@@ -1,0 +1,351 @@
+.chapter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+
+  &--panel-open {
+    grid-template-columns: minmax(0, 1fr) 380px;
+  }
+
+  &.loading {
+    color: var(--muted);
+    padding: 3rem;
+    text-align: center;
+  }
+}
+
+.chapter__header {
+  margin-bottom: 1rem;
+}
+
+.chapter__nav {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: 600;
+  }
+}
+
+.chapter__toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+
+  &-label {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+}
+
+.toggle {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+
+  &--on {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+  }
+}
+
+.chapter__legend {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+// Legend swatches mirror the actual word markings: solid amber underline,
+// purple text, dotted blue underline.
+.legend-swatch {
+  display: inline-block;
+  width: 1.1em;
+  margin-right: 0.35em;
+
+  &--decision {
+    height: 0;
+    border-bottom: 2px solid var(--decision);
+    vertical-align: 0.2em;
+  }
+  &--ot {
+    width: auto;
+    color: var(--ot);
+    font-weight: 700;
+
+    &::before {
+      content: 'Αα';
+    }
+  }
+  &--note {
+    height: 0;
+    border-bottom: 2px dotted var(--note);
+    vertical-align: 0.2em;
+  }
+}
+
+// ---- verse card ----
+
+.verse {
+  position: relative;
+  display: flex;
+  gap: 0.75rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 1rem 1.1rem;
+  margin-bottom: 0.9rem;
+  scroll-margin-top: 1rem;
+}
+
+.verse__num {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-decoration: none;
+  padding-top: 0.5rem;
+  min-width: 1.6rem;
+  text-align: right;
+}
+
+.verse__star {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+  padding: 0.25rem;
+  border-radius: 6px;
+  color: var(--muted);
+  opacity: 0.55;
+
+  svg {
+    width: 21px;
+    height: 21px;
+    display: block;
+    transition: transform 0.12s ease;
+  }
+
+  &:hover {
+    opacity: 1;
+    color: var(--decision);
+    background: var(--decision-soft);
+
+    svg {
+      transform: scale(1.12);
+    }
+  }
+
+  &--on {
+    opacity: 1;
+    color: var(--decision);
+  }
+}
+
+.verse__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.verse__greek {
+  margin: 0 0 0.6rem;
+  padding-right: 2.2rem; // keep clear of the star in the card's top-right corner
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  row-gap: 0.5rem;
+}
+
+.word-unit {
+  display: inline-flex;
+  align-items: flex-end;
+}
+
+// Forces a new row inside the flex-wrapped Greek line (poetry/quotation breaks).
+.line-break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.punct {
+  font-family: var(--font-greek);
+  font-size: 1.35rem;
+  color: var(--muted);
+  padding-bottom: 0.15rem;
+}
+
+.word {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  padding: 0.15rem 0.3rem;
+  margin: 0 0.05rem;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--accent-soft);
+  }
+
+  // Underlines sit on the inner text span (no border-radius) so they stay
+  // square-cut. Decision = solid amber; noted = dotted blue; both can stack.
+  &--decision .word__g {
+    border-bottom-color: var(--decision);
+  }
+
+  &--noted .word__g {
+    text-decoration: underline dotted var(--note) 2px;
+    text-underline-offset: 0.3em;
+  }
+
+  &--ot .word__g {
+    color: var(--ot);
+  }
+
+  &--selected {
+    background: var(--accent-soft);
+    outline: 1px solid var(--accent);
+  }
+}
+
+.word__g {
+  font-family: var(--font-greek);
+  font-size: 1.35rem;
+  line-height: 1.3;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0.05rem;
+}
+
+.word__layer {
+  font-size: 0.68rem;
+  line-height: 1.25;
+  max-width: 9rem;
+}
+
+.word__tr {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.word__gl {
+  color: var(--accent);
+}
+
+.word__morph {
+  color: var(--decision);
+  font-family: monospace;
+  font-size: 0.62rem;
+}
+
+
+// ---- workspace ----
+
+.verse__workspace {
+  border-top: 1px dashed var(--line);
+  padding-top: 0.6rem;
+}
+
+.verse__draft {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  padding: 0.5rem 0.65rem;
+  resize: vertical;
+
+  &:focus {
+    outline: 2px solid var(--accent);
+    border-color: transparent;
+  }
+
+  &::placeholder {
+    color: var(--muted);
+    opacity: 0.7;
+  }
+}
+
+.verse__actions {
+  margin-top: 0.4rem;
+}
+
+.reveal {
+  border: none;
+  background: none;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.15rem 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.verse__compare {
+  margin-top: 0.5rem;
+  border-left: 3px solid var(--accent-soft);
+  padding-left: 0.75rem;
+}
+
+.compare-row {
+  display: flex;
+  gap: 0.75rem;
+  margin: 0.35rem 0;
+  font-size: 0.9rem;
+
+  &__label {
+    flex: 0 0 6.5rem;
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding-top: 0.15rem;
+  }
+
+  &__text {
+    flex: 1;
+  }
+}
+
+.verse__notes {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+@media (max-width: 980px) {
+  .chapter--panel-open {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

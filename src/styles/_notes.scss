@@ -1,0 +1,81 @@
+.note {
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--note);
+  border-radius: 8px;
+  background: var(--bg);
+  font-size: 0.9rem;
+
+  summary {
+    cursor: pointer;
+    padding: 0.5rem 0.7rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+  }
+
+  &__category {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    color: var(--note);
+    background: var(--note-soft);
+    border-radius: 999px;
+    padding: 0.08rem 0.5rem;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-weight: 600;
+  }
+
+  &__ref {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  &__body {
+    padding: 0 0.85rem 0.6rem;
+  }
+
+  &__meta {
+    padding: 0 0.85rem 0.6rem;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  // category accents
+  &--grammar,
+  &--syntax {
+    border-left-color: var(--decision);
+    .note__category {
+      color: var(--decision);
+      background: var(--decision-soft);
+    }
+  }
+
+  &--textual {
+    border-left-color: var(--ot);
+    .note__category {
+      color: var(--ot);
+      background: var(--ot-soft);
+    }
+  }
+
+  &--lexical,
+  &--translation,
+  &--context {
+    border-left-color: var(--accent);
+    .note__category {
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+  }
+}
